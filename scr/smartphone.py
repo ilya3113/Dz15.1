@@ -1,4 +1,4 @@
-from product import Product
+from scr.product import Product
 
 
 class Smartphone(Product):
