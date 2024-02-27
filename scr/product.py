@@ -1,4 +1,8 @@
-class Product:
+from scr.abstract_product import AbstractProduct
+from scr.mixin_repr import MixinRepr
+
+
+class Product(AbstractProduct, MixinRepr):
     """
     name: (str) название продукта
     description: (str) описание продукта

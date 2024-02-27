@@ -1,5 +1,5 @@
-from src.abstract_product import AbstractProduct
-from src.product import Product
+from scr.abstract_product import AbstractProduct
+from scr.product import Product
 
 
 class LawnGrass(Product, AbstractProduct):

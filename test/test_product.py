@@ -1,5 +1,7 @@
-from scr.product import Product
 import pytest
+
+
+from scr.product import Product
 
 
 def test_init_product(test_product):
