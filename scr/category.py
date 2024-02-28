@@ -28,6 +28,9 @@ class Category:
         """
         Функция добавляет в список продуктов новый продукт
         """
+        if not isinstance(value, Product):
+            raise TypeError("Добавлять можно только объекты Product или его наследников")
+
         self.__product.append(value)
 
     @property

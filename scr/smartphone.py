@@ -1,7 +1,8 @@
+from scr.abstract_product import AbstractProduct
 from scr.product import Product
 
 
-class Smartphone(Product):
+class Smartphone(Product, AbstractProduct):
     """
     Класс Смартфоны:
 
@@ -14,8 +15,22 @@ class Smartphone(Product):
     memory (int) объем встроенной памяти
     color (str) цвет смартфона
     """
-    def __init__(self, name: str, description: str, price: float, quantity: int, performance: float, model: str, memory: int, color: str):
+
+    def __init__(self, name: str, description: str, price: float, quantity: int, performance: float, model: str,
+                 memory: int, color: str):
         super().__init__(name, description, price, quantity, color)
         self.performance = performance
         self.model = model
         self.memory = memory
+
+    @classmethod
+    def creates_product(cls, product: dict) -> object:
+        """
+        Класс метод который принимает словарь и создает новый объект класса Product
+
+        :product (dict) продукт по которому создаст объект
+
+        :return (object) объект класса Product
+        """
+        return cls(product["name"], product["description"], product["price"], product["quantity"],
+                   product["performance"], product["model"], product["memory"], product["color"])
