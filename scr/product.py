@@ -1,5 +1,5 @@
-from scr.abstract_product import AbstractProduct
-from scr.mixin_repr import MixinRepr
+from src.abstract_product import AbstractProduct
+from src.mixin_repr import MixinRepr
 
 
 class Product(AbstractProduct, MixinRepr):
@@ -17,6 +17,7 @@ class Product(AbstractProduct, MixinRepr):
         self.price = price
         self.quantity = quantity
         self.color = color
+        super().__init__()
 
     def __str__(self) -> str:
         """
@@ -84,13 +85,21 @@ class Product(AbstractProduct, MixinRepr):
             self.price = value
 
     @classmethod
-    def creates_product(cls, product: dict) -> object:
+    def creates_product(cls, product: dict, list_product: list) -> object:
         """
         Класс метод который принимает словарь и создает новый объект класса Product
+        если такого объекта еще нет в списке продуктов
 
         :product (dict) продукт по которому создаст объект
 
+        :list_product (list) список уже существующих продуктов
+
         :return (object) объект класса Product
         """
+        for elem in list_product:
+            if elem.name in product.get("name"):
+                elem.quantity += product.get("quantity")
+                if elem.price != product.get("price"):
+                    elem.price = elem.price if elem.price > product.get("price") else product.get("price")
 
         return cls(product["name"], product["description"], product["price"], product["quantity"])
