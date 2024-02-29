@@ -1,5 +1,5 @@
-from scr.abstract_product import AbstractProduct
-from scr.product import Product
+from src.abstract_product import AbstractProduct
+from src.product import Product
 
 
 class LawnGrass(Product, AbstractProduct):
@@ -14,11 +14,11 @@ class LawnGrass(Product, AbstractProduct):
     germination_period (float) срок прорастания
     color (str) цвет травы
     """
-    def __init__(self, name: str, description: str, price: float, quantity: int, manufacturer: str,
-                 germination_period: float, color: str):
-        super().__init__(name, description, price, quantity, color)
+    def __init__(self, name: str, description: str, price: float, quantity: int,
+                 manufacturer: str, germination_period: float, color: str):
         self.manufacturer = manufacturer
         self.germination_period = germination_period
+        super().__init__(name, description, price, quantity, color)
 
     @classmethod
     def creates_product(cls, product: dict) -> object:
