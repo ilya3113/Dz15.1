@@ -1,7 +1,7 @@
 import pytest
 
-
-from scr.product import Product
+from src.category import Category
+from src.product import Product
 
 
 def test_init_product(test_product):
@@ -11,13 +11,36 @@ def test_init_product(test_product):
     assert test_product.quantity == 5
 
 
-def test_creates_product(test_product):
+def test_creates_product(test_product, test_create_product):
     assert Product.creates_product({
         "name": "Xiaomi 14 Pro",
         "description": "Влагозащищенный корпус",
         "price": 190_000.0,
         "quantity": 5
-    })
+    }, test_create_product)
+
+    assert test_create_product[0].quantity == 5
+    assert test_create_product[0].price == 180_000.0
+
+    assert Product.creates_product({
+        "name": "Samsung Galaxy C23 Ultra",
+        "description": "256GB, Серый цвет, 200MP камера",
+        "price": 190000.0,
+        "quantity": 5
+      }, test_create_product)
+
+    assert test_create_product[0].quantity == 10
+    assert test_create_product[0].price == 190_000.0
+
+    assert Product.creates_product({
+        "name": "Samsung Galaxy C23 Ultra",
+        "description": "256GB, Серый цвет, 200MP камера",
+        "price": 150000.0,
+        "quantity": 5
+    }, test_create_product)
+
+    assert test_create_product[0].quantity == 15
+    assert test_create_product[0].price == 190_000.0
 
 
 def test_get_price_product(test_product):
@@ -34,13 +57,13 @@ def test_len_product(test_product):
     assert test_product.__len__() == 5
 
 
-def test_add_product(test_product):
+def test_add_product(test_product, test_create_product):
     assert test_product.__add__(Product.creates_product({
         "name": "Xiaomi 14 Pro",
         "description": "Влагозащищенный корпус",
         "price": 190_000.0,
         "quantity": 5
-    })) == 1_850_000.0
+    }, test_create_product)) == 1_850_000.0
 
 
 def test_repr_product(test_product):
