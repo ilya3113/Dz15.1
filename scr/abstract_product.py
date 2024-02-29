@@ -10,7 +10,7 @@ class AbstractProduct(ABC):
         pass
 
     @abstractmethod
-    def creates_product(self, product):
+    def creates_product(self, product, list_product):
         """
         Функция для инициализации нового объекта
         """
