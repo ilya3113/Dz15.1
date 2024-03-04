@@ -1,8 +1,8 @@
-from src.mixin_repr import MixinRepr
+from src.abstract_product import AbstractProduct
 from src.product import Product
 
 
-class LawnGrass(Product, MixinRepr):
+class LawnGrass(Product, AbstractProduct):
     """
     Класс Трава Газонная
 
