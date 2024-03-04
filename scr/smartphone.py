@@ -1,4 +1,4 @@
-from scr.abstract_product import AbstractProduct
+from src.mixin_repr import MixinRepr
 from scr.product import Product
 
 
