@@ -1,4 +1,4 @@
-from src.abstract_product import AbstractProduct
+from src.mixin_repr import MixinRepr
 from src.product import Product
 
 
