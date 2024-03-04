@@ -2,7 +2,7 @@ from scr.abstract_product import AbstractProduct
 from scr.product import Product
 
 
-class Smartphone(Product, AbstractProduct):
+class Smartphone(Product, MixinRepr):
     """
     Класс Смартфоны:
 
