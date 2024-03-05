@@ -1,6 +1,5 @@
 from exceptions.exceptions import ProductQuantityZeroError
 from src.category import Category
-from src.order import Order
 from src.product import Product
 
 
