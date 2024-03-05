@@ -1,4 +1,4 @@
-from exceptions.exceptions import ProductQuantityZeroError
+from exceptions import ProductQuantityZeroError
 from src.category import Category
 from src.product import Product
 
