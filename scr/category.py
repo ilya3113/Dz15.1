@@ -1,3 +1,7 @@
+from exceptions import ProductQuantityZeroError
+from src.product import Product
+
+
 class Category:
     """
     name: (str) название категории
@@ -24,12 +28,23 @@ class Category:
         """
         return f"{self.name}, количество продуктов: {len(self.__product)} шт."
 
+    def __len__(self) -> int:
+        """
+        Функция считает количество продуктов
+
+        :return (int) количество продуктов
+        """
+        return len(self.__product)
+
     def add_product(self, value: object) -> None:
         """
         Функция добавляет в список продуктов новый продукт
         """
         if not isinstance(value, Product):
             raise TypeError("Добавлять можно только объекты Product или его наследников")
+
+        if not value.quantity > 0:
+            raise ProductQuantityZeroError("ProductQuantityZeroError: Невозможно посчитать количество товара.")
 
         self.__product.append(value)
 
@@ -40,8 +55,33 @@ class Category:
 
         :return (list) список продуктов
         """
-        list_products = []
-        for product in self.__product:
-            list_products.append(f"{product["name"]}, {product["price"]} руб. Остаток: {product["quantity"]} шт.")
+        return [Product.__str__(product) for product in self.__product]
 
-        return list_products
+    @property
+    def copy_product(self) -> list:
+        """
+        Функция геттер которая копирует список продуктов
+        для дальнейшей работы
+
+        :return (list) список продуктов
+        """
+        return [product for product in self.__product]
+
+    def get_average_product_price(self) -> float:
+        """
+        Функция считает средний ценник всех товаров
+
+        :return (float) средняя цена товара
+        """
+        try:
+            price = 0
+            quantity = 0
+            for product in self.__product:
+                price += (product.price * product.quantity)
+                quantity += product.quantity
+
+            result = round((price / quantity), 1)
+        except ZeroDivisionError:
+            return 0.0
+        else:
+            return result
